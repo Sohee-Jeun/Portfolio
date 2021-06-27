@@ -51,3 +51,9 @@ function scrollIntoView(selector){
     scrollTo.scrollIntoView({behavior:'smooth'});
 }
 
+//Make home slowly fade to transparent as the windows scrolls down
+const scrollHome = document.querySelector('.home__container');
+const homeheight = scrollHome.getBoundingClientRect().height; 
+document.addEventListener('scroll',()=>{
+    scrollHome.style.opacity = (1-window.scrollY/homeheight);
+});
