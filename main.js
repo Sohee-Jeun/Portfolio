@@ -13,9 +13,11 @@ document.addEventListener('scroll',()=>{
     }
 });
 
-//Handle scrolling when tapping on the navbar menu
+/*//Handle scrolling when tapping on the navbar menu
+//handle click on "contact me" button on home
 const navbarMenu = document.querySelector('.navbar__menu');
-navbarMenu.addEventListener('click', (event)=>{
+const contactbtn = document.querySelector('.home__contact');
+navbarMenu, contactbtn.addEventListener('click', (event)=>{
     
     const target = event.target;
     const link = target.dataset.link;
@@ -25,4 +27,27 @@ navbarMenu.addEventListener('click', (event)=>{
     console.log(event.target.dataset.link);
     const scrollTo = document.querySelector(link);
     scrollTo.scrollIntoView({behavior:'smooth'});
+});*/
+
+const navbarMenu = document.querySelector('.navbar__menu');
+navbarMenu.addEventListener('click', (event)=>{
+    
+    const target = event.target;
+    const link = target.dataset.link;
+    if(link == null){
+        return;
+    }
+   scrollIntoView(link);
 });
+
+const contactbtn = document.querySelector('.home__contact');
+contactbtn.addEventListener('click', ()=>{
+  
+   scrollIntoView('#contact');
+});
+
+function scrollIntoView(selector){
+    const scrollTo = document.querySelector(selector);
+    scrollTo.scrollIntoView({behavior:'smooth'});
+}
+
