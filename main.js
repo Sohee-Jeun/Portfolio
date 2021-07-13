@@ -13,6 +13,7 @@ document.addEventListener('scroll',()=>{
     }
 });
 
+
 /*//Handle scrolling when tapping on the navbar menu
 //handle click on "contact me" button on home
 const navbarMenu = document.querySelector('.navbar__menu');
@@ -37,6 +38,7 @@ navbarMenu.addEventListener('click', (event)=>{
     if(link == null){
         return;
     }
+    navbarMenu.classList.remove('open');
    scrollIntoView(link);
 });
 
@@ -46,6 +48,12 @@ contactbtn.addEventListener('click', ()=>{
    scrollIntoView('#contact');
 });
 
+/*Navbar  toggle button for small screen*/
+
+const toggleBtn = document.querySelector('.navbar__toggle_btn');
+toggleBtn.addEventListener('click', ()=> {
+    navbarMenu.classList.toggle('open');
+});
 
 //Make home slowly fade to transparent as the windows scrolls down
 const scrollHome = document.querySelector('.home__container');
@@ -80,10 +88,19 @@ const projectContainer = document.querySelector('.work__projects');
 const projects  = document.querySelectorAll('.project');
 workBtnContainer.addEventListener('click', (e)=>{
 const filter = e.target.dataset.filter || e.target.parentNode.dataset.filter;
-
 if(filter == null){
     return;
 }
+
+//Remove selection from the previous iten and select the new one
+const active = document.querySelector('.category__btn.selected');
+active.classList.remove('selected');
+active.classList.add('selected');
+
+const target = e.target.nodeName === 'BUTTON' ? e.target : e.target.parentNode;
+e.target.classList.add('selected');
+active.classList.remove('selected');
+
 projectContainer.classList.add('anim-out');
 setTimeout(()=>{
 projects.forEach((project) =>{
