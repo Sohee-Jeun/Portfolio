@@ -63,6 +63,7 @@ button {
   cursor: pointer;
   border: none;
   outline: none;
+  padding: 0;
 }
 /* Typography */
 
@@ -174,6 +175,9 @@ p {
   padding: 8px 12px;
   border: 2px solid var(--color-white);
   border-radius: var(--size-border-radius);
+}
+.home__contact:hover {
+  background-color: var(--color-orange);
 }
 
 /*Section common*/
@@ -495,6 +499,14 @@ p {
 
 /*For below 768px screen width*/
 @media screen and (max-width: 768px) {
+  :root {
+    /* Font size */
+    --font-large: 30px;
+    --font-medium: 18px;
+    --font-regular: 16px;
+    --font-small: 14px;
+    --font-micro: 12px;
+  }
   #navbar {
     flex-direction: column;
     align-items: flex-start;
@@ -520,16 +532,24 @@ p {
   .navbar__menu__item {
     text-align: center;
   }
+  .section {
+    padding: 16px;
+  }
   .about__majors {
     flex-direction: column;
+    margin-top: 30px;
+    margin-bottom: 0px;
   }
 
   .major {
-    margin-bottom: 38px;
+    margin-bottom: 35px;
   }
 
   .skills {
     flex-direction: column;
+  }
+  .category__btn {
+    padding: 8px;
   }
 
   .project {
