@@ -4,8 +4,8 @@
 const navbar = document.querySelector('#navbar');
 const navbarHeight = navbar.getBoundingClientRect().height; 
 document.addEventListener('scroll',()=>{
-    console.log(window.scrollY);
-    console.log(`navbarHeight: ${navbarHeight}`); 
+    //console.log(window.scrollY);
+    //console.log(`navbarHeight: ${navbarHeight}`); 
     if(window.scrollY > navbarHeight){
         navbar.classList.add('navbar--dark');
     } else{
@@ -115,3 +115,51 @@ projects.forEach((project) =>{
 },300);
 
 });
+
+// 1. 모든 섹션 요소들과 메뉴 아이템들 가지고 온다.
+// 2. IntersectionObserver를 이용해서 모든 섹션들을 관찰한다.
+// 3. 보여지는 섹션에 해당하는 메뉴 아이템을 활성화 시킨다.
+
+const sectionIds = [
+ '#home',
+ '#about',
+ '#skills',
+ '#works',
+ '#testimonials',
+ '#contact',
+];
+
+const sections = sectionIds.map(id=>document.querySelector(id));
+const navItems = sectionIds.map(id => document.querySelector(`[data-link="${id}"]`));
+
+let selectedNavItem = navItems[0];
+
+function selectNavItem(selected){
+    selectedNavItem.classList.remove('active');
+    selectedNavItem = navItems[selectedIndex];
+    selectedNavItem.classList.add('active');
+}
+
+const observerOptions ={
+    root: null,
+    rootMargin:'0px',
+    threshold :0.3, 
+};
+
+const observerCallback = (enrties, observer)=>{
+    enrties.forEach(entry =>{
+    if(!entry.isIntersecting && entry.intersectiongRatio > 0){
+        const index = sectionIds.indexOf(`${entry.target.id}`);
+        let selectedIndex;
+        //t스크롤링이 아래도 되어서 페이지가 올라옴
+        if(entry.boundingClientRect.y < 0){
+            selectedIndex = index + 1;
+        } else{
+            selectedIndex = index - 1;
+        }
+
+    }
+    });
+};
+const observer = new IntersectionObserver(observerCallback, observerOptions);
+sections.forEach(section => observer.observe(section));
