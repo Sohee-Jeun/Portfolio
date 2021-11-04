@@ -7,7 +7,23 @@ The Sohee's portfolio is a portfolio of Sohee Jeun.
 
 ---
 
-HTML, CSS, JavaScript
+HTML5, CSS3, Vanilla JavaScript
+
+
+## What I learned
+
+---
+
+1. Plan & Design
+2. Git, Github
+3. HTML - Head(Search Engine)
+4. Box Model, HTML Mark-up, BEM(Block, Element, Modifier)
+5. CSS
+6. Styling
+7. Javascript
+8. Publish
+
+
 
 ## References
 
