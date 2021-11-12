@@ -31,8 +31,7 @@ navbarMenu, contactbtn.addEventListener('click', (event)=>{
 });*/
 
 const navbarMenu = document.querySelector('.navbar__menu');
-navbarMenu.addEventListener('click', (event)=>{
-    
+navbarMenu.addEventListener('click', event=>{
     const target = event.target;
     const link = target.dataset.link;
     if(link == null){
@@ -40,6 +39,7 @@ navbarMenu.addEventListener('click', (event)=>{
     }
     navbarMenu.classList.remove('open');
    scrollIntoView(link);
+   selectedNavItem(target);
 });
 
 const contactbtn = document.querySelector('.home__contact');
@@ -77,10 +77,7 @@ arrowUp.addEventListener('click',()=>{
 });
 
 
-function scrollIntoView(selector){
-    const scrollTo = document.querySelector(selector);
-    scrollTo.scrollIntoView({behavior:'smooth'});
-}
+
 
 //Projects
 const workBtnContainer = document.querySelector('.work__categories');
@@ -136,10 +133,14 @@ let selectedNavItem = navItems[0];
 
 function selectNavItem(selected){
     selectedNavItem.classList.remove('active');
-    selectedNavItem = navItems[selectedIndex];
+    selectedNavItem = navItems;
     selectedNavItem.classList.add('active');
 }
-
+function scrollIntoView(selector){
+    const scrollTo = document.querySelector(selector);
+    scrollTo.scrollIntoView({behavior:'smooth'});
+    selectNavItem(navItems[sectionIds.indexOf(selector)]);
+}
 const observerOptions ={
     root: null,
     rootMargin:'0px',
@@ -163,3 +164,15 @@ const observerCallback = (enrties, observer)=>{
 };
 const observer = new IntersectionObserver(observerCallback, observerOptions);
 sections.forEach(section => observer.observe(section));
+
+window.addEventListener('wheel',()=> {
+    if(window.scrollY === 0){
+        selectedNavItem = 0;
+    }else if (
+        Math.round(window.scrollY + window.innerHeight) >= document.body.clientHeight){
+        selectedNavIndex = navItems.length - 1;
+    }
+    selectNavItem(navItems[selectedNavItem]);
+});
+
+
